@@ -1,0 +1,179 @@
+<div class = 'container' >
+	<div class="row top-head">
+		<div class="col">	Add Item Here </div>
+		<div class="col">Your Added Items({{todo.getLength()}})</div>
+	</div>
+	<div class = 'row todo-body'>
+		<div class = 'col-md-6'>
+			<form name = 'todoForm' >
+				<div class ='form-group form-body'>
+					
+					<md-input-container class = 'mb-0'>
+					<label  >{{todo.todo_mode}}</label>	
+					<input class = 'todoitem' type="text" ng-model= 'todo.todo_title' 
+					ng-minlength = '4' required>
+				   </md-input-container>
+					<div>
+						<label class = 'custom-control custom-radio'>
+							<input name = 'category' ng-model ='todo.category' type = 'radio' 
+							class ='custom-control-input' value = 'study'>
+							<span class ="custom-control-indicator"></span>
+							<span class ="custom-control-description"  style="color:blue">Study</span>
+						</label>
+						<label class = 'custom-control custom-radio'>
+							<input  name = 'category' ng-model ='todo.category' type = 'radio' 
+							class ='custom-control-input bg-warning' value = 'personal'>
+							<span class ="custom-control-indicator  "></span>
+							<span class ="custom-control-description" style="color:maroon">Personal</span>
+						</label>
+						<label class = 'custom-control custom-radio'>
+							<input name = 'category' ng-model ='todo.category' type = 'radio' 
+							class ='custom-control-input' value="work">
+							<span class ="custom-control-indicator"></span>
+							<span class ="custom-control-description"  style="color:green">Work</span>
+						</label>
+						<label class = 'custom-control custom-radio'>
+							<input name = 'category' ng-model ='todo.category' type = 'radio'
+							class ='custom-control-input' value="uncategorized" selected>
+							<span class ="custom-control-indicator"></span>
+							<span class ="custom-control-description" style="color:purple">Uncategorized</span>
+						</label>
+					</div>
+					<small ng-show ="todoForm.$invalid" 
+					ng-class ="{'show-animate' : todoForm.$invalid}">
+					Pls Make Sure You Type In  Up To 10 Characters
+				</small>
+			</div>
+
+			<div class ='form-group form-body'>
+			 <md-button type = "submit" class = 'md-raised md-primary' ng-disabled ='todoForm.$invalid'
+				ng-click = "todo.addItem()">{{todo.button_val}} 
+				<span class = 'icon mdi mdi-check' ng-show = "todo.button_state == 'save'"></span> 
+				<span class = 'icon mdi mdi-plus' ng-show = "todo.button_state == 'add'" ></span>
+			</md-button>
+		</div>
+		<small class = 'form-hint pad-10-margin-10'>
+			<p>{{todo.nonsense_text}}</p>
+		</small>
+	</form>
+</div>
+
+<div class = 'col-md-6 todo-items-box'>
+	<div class="row justify-content-sm-end">
+		<div class="col col-md-6">
+			<md-input-container class= 'top-search-bar mb-0'>
+				<input type="text" class="search" 
+				placeholder="search..." ng-model= "todo.todoSearch">
+			</md-input-container>
+		</div>
+	</div>
+	<div class="row justify-content-sm-center table-responsive no-scroll-bar">
+		<div class="col col-md-12 justify-content-sm-center">
+			<div class="btn-group btn-group-md btn-block " data-toggle="buttons">
+				<label class="btn btn-primary  active" 
+				ng-click = 'todo.filerByCategory("all")' >
+				<input type="radio" autocomplete="off" >
+				All 
+				<span class = 'badge badge-pill badge-success'>
+					{{todo.fetchTodoLengthByCategory("all")}}
+				</span>
+			</label>
+
+			<label class="btn btn-primary btn-block" 
+			ng-click ="todo.filerByCategory('study')">
+			<input type="radio" autocomplete="off">
+			Study 
+			<span class = 'badge badge-pill badge-success animated' ng-class = "{bounce: true}">{{todo.fetchTodoLengthByCategory("study")}}
+			</span>
+		</label>
+
+		<label class="btn btn-primary" ng-click = 'todo.filerByCategory("work")'> 
+			<input type="radio" autocomplete="off">
+			Work 
+			<span class = 'badge badge-pill badge-success'>
+				{{todo.fetchTodoLengthByCategory("work")}}
+			</span>
+		</label>
+
+		<label class="btn btn-primary btn-block" ng-click = 'todo.filerByCategory("personal")'>
+			<input type="radio"  autocomplete="off">
+			Personal
+			<span class = 'badge badge-pill badge-success'>
+				{{todo.fetchTodoLengthByCategory("personal")}}
+			</span>
+		</label>
+
+		<label class="btn btn-primary" 
+		ng-click = 'todo.filerByCategory("uncategorized")'>
+		<input type="radio"  autocomplete="off" >
+		Uncategorized 
+		<span class = 'badge badge-pill badge-success'>
+			{{todo.fetchTodoLengthByCategory("uncategorized")}}
+		</span>
+	</label>
+
+</div>
+</div>
+</div>
+
+<ul class= 'todos'>
+	<!-- <div class = 'empty-todos' ng-hide = 'todo.getLength() > 0'>
+		Your Don't Have Any Todos Yet
+		We Will Place Your Todos Here When You Add Them 
+	</div> -->
+
+	<!-- <div class = 'empty-todos' ng-show = 'todo.empty_cat_state_message'>
+		{{todo.empty_cat_state_message}}
+	</div> -->
+	<!-- Spinner -->
+	<div class = 'center-content' ng-show = "todo.isloadingdata">
+		<md-progress-circular mode = 'indeterminate'  md-diameter = '50' > 
+		</md-progress-circular>
+   </div>
+<!--  -->
+<li ng-repeat = "item in todo.todos|filter:todo.todoSearch" 
+ng-class ="{'completed-td': item.completed}">
+<label class = 'custom-control custom-checkbox m-0'>
+	<input type = 'checkbox' class ='custom-control-input' ng-model = 'item.done'>
+	<span class ="custom-control-indicator"></span>
+	<span class ="custom-control-description" style="color:purple"></span>
+</label>
+{{$index + 1}}. {{item.title}}
+<small class="help-text">({{item.category}}) <span am-time-ago ='item.dateCreated'></span></small>
+<span class="icon mdi mdi-star favourite" ng-show = 'item.favourite' ></span>
+
+<span class = 'close icon mdi mdi-delete mx-1' 
+ng-click='todo.removeItem($index)' style="font-size:20px"></span>
+<span class = 'close icon mdi mdi-edit' ng-click='todo.editItem($index)' 
+style="font-size:20px" ></span>
+<button ng-show = 'false' class ='btn btn-primary btn-sm pull-right'>Undo</button>
+</li>
+</ul>
+
+<div class = "p-1" ng-show ="todo.todos.length > 0">
+	<div class = 'tool-box'>
+		<div class="row">
+			<div class="col-xs-1 col-sm-2">
+				<label class = 'custom-control custom-checkbox m-0'>
+					<input type = 'checkbox' class ='custom-control-input' ng-model = 'todo.mark_all' 
+					ng-click = 'todo.markItems()'>
+					<span class ="custom-control-indicator"></span>
+					<span class ="custom-control-description" style="color:purple"></span>
+				</label>
+			</div>
+			<div class="col-xs-1 col-sm-3  icon-container">
+				<i class = 'icon mdi mdi-delete px-1' ng-click = 'todo.deleteMarked()' style="font-size: 25px"></i>
+			</div>
+			<div class="col-xs-1 col-sm-3  icon-container">
+				<i class = 'icon mdi mdi-check px-1' ng-click = 'todo.toggleItemsCompleted()' style="font-size: 25px"></i>
+			</div>
+			<div class="col-xs-1 col-sm-3  icon-container">
+				<i class = 'icon mdi mdi-star star px-1' ng-click ='todo.markFavorite()'
+				style="font-size: 25px"></i>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,51 @@
+<div class = "container">
+	<div class  = "row" >
+		<div class = "col-md-4 offset-4" >
+			<form name = "signupForm" style = "background-color:whitesmoke; padding:20px;margin-top:70px" 
+			ng-submit ='Signup.signUp()' novalidate>
+			<div class = "form-group">
+				<input class = "form-control" type="text" placeholder="email" ng-model = 'Signup.user.email'>
+			</div>
+			<div class = "form-group">
+				<input class = "form-control" type="password" placeholder="password" minlength="7" 
+				ng-model = 'Signup.user.password' autocomplete="off"> 
+			</div>
+			<div class="loading-button ">
+				<input  class = 'btn btn-block btn-primary' type="submit" value = "Sign Up" name="" 
+				ng-disabled = "signupForm.$invalid">
+				<div class="progress" ng-class ="{'hidden': !Signup.loading}">
+					<div class="indeterminate"></div>
+				</div>
+			</div>
+			
+		</form>
+		<div class = 'align-center'>
+			<button class = 'btn btn-outline m-2'>
+				<span class = "icon mdi mdi-facebook"> Sign Up</span>
+			</button>
+			<button class = 'btn btn-outline  m-2'>
+				<span class = "icon mdi mdi-google"> Sign Up</span>
+			</button>
+		</div>
+		<div class = "create-account-block"> 
+			I Have<span>Registered</span>?  <a href = "#!/login">login</a>
+		</div>
+	</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class = "left-triangle"></div>
+<div class = "right-triangle"></div> -->

@@ -1,0 +1,30 @@
+<div class = "container">
+	<div class  = "row" >
+		<div class = "col-md-4 offset-4" >
+			<form name = "login-form" ng-submit = "Login.login()" 
+			style = "background-color:whitesmoke;padding:20px;margin-top:70px">
+			<div class = "form-group">
+				<input class = "form-control" ng-model = "Login.user.email" type="text" placeholder="email">
+			</div>
+			<div class = "form-group">
+				<input class = "form-control" ng-model = "Login.user.password" type="password" placeholder="password"> 
+			</div>
+             <!-- {{Login.loading}} -->
+			<div class="loading-button ">
+				<input  class = 'btn btn-block btn-primary' type="submit" value = "Login" name="" 
+				ng-disabled = "login-form.$invalid">
+				<div class="progress" ng-class ="{'hidden': !Login.loading}">
+					<div class="indeterminate"></div>
+				</div>
+			</div>
+
+		</form>
+		<div class = "create-account-block"> 
+			New to <span>TodoList</span>?  <a ng-href = "#!/signup">Create an account</a>
+		</div>
+	</div>
+</div>
+</div>
+
+<div class = "left-triangle"></div>
+<div class = "right-triangle"></div>

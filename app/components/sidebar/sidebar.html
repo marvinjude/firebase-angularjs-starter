@@ -1,0 +1,57 @@
+<md-sidenav md-component-id = 'left' class = 'md-sidenav-left' md-whiteframe = '4'> 
+  <md-toolbar class = 'md-theme-indigo'>
+    <h1 class ='md-toolbar-tools'>
+      Account
+    </h1>
+  </md-toolbar>
+
+  <!-- components/sidebar/def-image.png" class = 'rounded-circle -->
+  <!-- mdi icon mdi-camera -->
+
+  <div class = "round-image ">
+    <img src="components/sidebar/def-image.png" class = "rounded-circle">
+    <div class ='overlay center-content'> 
+     <span class ='mdi icon mdi-camera ' style="font-size: 25px"></span>
+   </div>
+ </div> 
+
+ <!-- mx-auto d-block img-thumbnail -->
+
+ <div>
+  <md-button  class = 'md-icon-button'>
+    <i class = 'icon mdi mdi-github ' style="font-size:25px"></i>
+  </md-button>
+  <md-button class = 'md-icon-button'>
+    <i class = 'icon mdi mdi-github ' style="font-size:25px"></i>
+  </md-button>
+  <md-button class = 'md-icon-button'>
+    <i class = 'icon mdi mdi-github ' style="font-size:25px"></i>
+  </md-button>
+</div>
+
+<md-toolbar class = 'md-theme-indigo'>
+  <h1 class ='md-toolbar-tools'>
+    Settings
+  </h1>
+</md-toolbar>
+
+
+<form name="myForm">
+  <input type="file" name="myImage" image-with-preview
+  ng-model="image"
+  accept="image/jpeg,image/png"
+  dimensions="height < 400 && width < 1800 && width > 2 * height">
+  <span class="error" ng-show="myForm.myImage.$error.image">
+    Not a JPEG or a PNG!
+  </span>
+  <span class="error" ng-show="myForm.myImage.$error.dimensions">
+    Invalid dimensions! Expecting a landscape image smaller than 1800x400.
+  </span>
+  <img ng-show="image.src" ng-src="{{image.src}}"/>
+</form>
+
+
+
+
+</md-sidenav> 
+
