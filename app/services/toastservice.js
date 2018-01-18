@@ -12,10 +12,10 @@ angular.module('myApp.toastService', [])
     right: true
   }
 
-  toastService.showSimpleToast = function(message){
+  toastService.showSimpleToast = function(message,time){
    $mdToast.show($mdToast.simple()
      .textContent(message)
-     .hideDelay(1000)
+     .hideDelay(time)
      .position('top right')
      .highlightAction(true)
      .parent($document[0].querySelector('#toast-area'))

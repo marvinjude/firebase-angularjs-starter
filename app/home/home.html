@@ -11,7 +11,7 @@
 					<md-input-container class = 'mb-0'>
 					<label  >{{todo.todo_mode}}</label>	
 					<input class = 'todoitem' type="text" ng-model= 'todo.todo_title' 
-					ng-minlength = '4' required>
+					ng-minlength = '4' ng-maxlength = '13'  required>
 				   </md-input-container>
 					<div>
 						<label class = 'custom-control custom-radio'>
@@ -20,12 +20,14 @@
 							<span class ="custom-control-indicator"></span>
 							<span class ="custom-control-description"  style="color:blue">Study</span>
 						</label>
+
 						<label class = 'custom-control custom-radio'>
 							<input  name = 'category' ng-model ='todo.category' type = 'radio' 
 							class ='custom-control-input bg-warning' value = 'personal'>
 							<span class ="custom-control-indicator  "></span>
 							<span class ="custom-control-description" style="color:maroon">Personal</span>
 						</label>
+
 						<label class = 'custom-control custom-radio'>
 							<input name = 'category' ng-model ='todo.category' type = 'radio' 
 							class ='custom-control-input' value="work">
@@ -117,14 +119,14 @@
 </div>
 
 <ul class= 'todos'>
-	<!-- <div class = 'empty-todos' ng-hide = 'todo.getLength() > 0'>
+	<div class = 'empty-todos' ng-hide = 'todo.getLength() > 0'>
 		Your Don't Have Any Todos Yet
 		We Will Place Your Todos Here When You Add Them 
-	</div> -->
+	</div>
 
-	<!-- <div class = 'empty-todos' ng-show = 'todo.empty_cat_state_message'>
+	<div class = 'empty-todos' ng-show = 'todo.empty_cat_state_message'>
 		{{todo.empty_cat_state_message}}
-	</div> -->
+	</div>
 	<!-- Spinner -->
 	<div class = 'center-content' ng-show = "todo.isloadingdata">
 		<md-progress-circular mode = 'indeterminate'  md-diameter = '50' > 

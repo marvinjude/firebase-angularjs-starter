@@ -9,7 +9,7 @@ angular.module('myApp.signup', ['ngRoute'])
 	});
 }])
 
-.controller('signupCtrl', ['$window','$firebaseObject','authService','$log', function($window,$firebaseObject,authService,$log){
+.controller('signupCtrl', ['$window','$firebaseObject','authService','$log','toastService', function($window,$firebaseObject,authService,$log,toastService){
 	var Signup = this;
 	Signup.loading = false;
     
@@ -27,9 +27,8 @@ angular.module('myApp.signup', ['ngRoute'])
 
 	 	  	//handle network issue
 	 	  	if(e.code ===  "auth/network-request-failed"){
-	 	  		$window.alert('No Network');
+	 	  	    toastService.showSimpleToast('No Internet Service Dectected',3000);
 	 	  	}
-
 	 	 });
 	 }  
 }]);

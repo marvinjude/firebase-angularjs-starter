@@ -1,5 +1,5 @@
 angular.module('myApp.todoService', [])
-.service('todoService',['$firebaseObject', 'authService' ,function($firebaseObject,authService){
+.service('todoService',['$firebaseObject','$log', 'authService' ,function($firebaseObject,$log,authService){
 	var userTodos = [];
 
   //get user id from authservice and fetch the reference
@@ -7,10 +7,13 @@ angular.module('myApp.todoService', [])
 	//fetch data on that reference
 	var obj = $firebaseObject(ref);
 
-	obj.$loaded(data=> userTodos = data.todos);
+	obj.$loaded((data) => {
+    userTodos = data.todos || [];
+  });
 
 
 	obj.$watch((eventSnapShot)=>{
+    $log.log(eventSnapShot);
        //show added toast
        //show removed toast
        //(child_added, child_moved, child_removed, or child_changed)

@@ -159,9 +159,9 @@ body{
 	color:hotpink;
 }
 
-input{
+/*input{
 	text-transform: capitalize;
-}
+}*/
 .sweell-button:active{
 	animation-name:swell ;
 	animation-timing-function: ease-out;
